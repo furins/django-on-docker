@@ -1,0 +1,10 @@
+* REFERENCES
+** Dockerizing Django with Postgres, Gunicorn, and Nginx by Michael Herman
+main inspiration
+(link)[https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/]
+
+** Deploy Django, Gunicorn, NGINX, Postgresql using Docker by Ruddra (Arnab Kumar Shil)
+[https://ruddra.com/docker-django-nginx-postgres/]
+
+** How to copy Docker images from one host to another without using a repository (SO)
+https://stackoverflow.com/questions/23935141/how-to-copy-docker-images-from-one-host-to-another-without-using-a-repository?rq=1
