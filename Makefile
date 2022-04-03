@@ -1,6 +1,27 @@
+# app name. A github repository will be created with this name
+app_name = myapp
+template_repo = django_dockerized
+github_user = furins
 
 # COMANDI DISPONIBILI
 init: ./.env.dev ./.env.prod ./.env.prod.db ./webapp
+
+./webapp:
+	gh repo create $(app_name) --private --clone --template https://github.com/$(github_user)/$(template_repo)
+	mv $(app_name) webapp
+	@echo please wait 5 seconds until the newly created repository propagates on github ...
+	@sleep 5s
+	git submodule add https://github.com/$(github_user)/$(app_name) webapp
+
+clean: check_clean
+	# RUN CLEAN BEFORE COMMITTING TO THE ORIGIN REPOSITORY
+	rm -rf ./webapp
+	# see https://stackoverflow.com/questions/20929336/git-submodule-add-a-git-directory-is-found-locally-issue
+	rm -rf .git/modules/webapp
+	rm ./.env.dev
+	rm ./.env.prod
+	rm ./.env.prod.db
+	rm ./.gitmodules
 
 build: ./.env.dev ./webapp
 	docker-compose build
@@ -61,6 +82,5 @@ collectstatic: ./.env.dev ./webapp
 ./.env.prod.db:
 	cp webapp_template/environment/.env.prod.db-sample ./.env.prod.db
 
-./webapp:
-	cp -R webapp_template/webapp ./webapp
-	echo "aggiungere submoduli nella cartella src attraverso il comando 'git submodule add <repository_path> <submodule_name>'"
+check_clean:
+	@echo "Are you sure? [y/N] " && read ans && [ $${ans:-N} = y ]
