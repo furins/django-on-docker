@@ -2,8 +2,7 @@
 
 Uses the default Django development server.
 
-1. Rename *.env.dev-sample* to *.env.dev*.
-1. Modify the first lines in the _Makefile_ to customize the webapp
+1. **Modify the first lines in the _Makefile_ to customize the webapp**
 1. Update the environment variables in the *docker-compose.yml* and *.env.dev* files.
 1. Build the images and run the containers:
 
